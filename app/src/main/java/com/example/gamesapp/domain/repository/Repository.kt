@@ -8,4 +8,5 @@ import com.example.gamesapp.utils.ResultState
 interface Repository {
     fun getGenres(): LiveData<ResultState<List<DataGenre>>>
     fun getGames(): LiveData<ResultState<List<DataGame>>>
+    fun searchGames(keyword: String): LiveData<ResultState<List<DataGame>>>
 }

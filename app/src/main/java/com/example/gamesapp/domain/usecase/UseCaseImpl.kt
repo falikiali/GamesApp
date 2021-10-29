@@ -10,4 +10,5 @@ import javax.inject.Inject
 class UseCaseImpl @Inject constructor(private val repository: Repository) : UseCase {
     override fun getGenres(): LiveData<ResultState<List<DataGenre>>> = repository.getGenres()
     override fun getGames(): LiveData<ResultState<List<DataGame>>> = repository.getGames()
+    override fun searchGames(keyword: String): LiveData<ResultState<List<DataGame>>> = repository.searchGames(keyword)
 }

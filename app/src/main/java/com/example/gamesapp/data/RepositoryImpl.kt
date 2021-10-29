@@ -52,4 +52,23 @@ class RepositoryImpl @Inject constructor(private val remoteDataSource: RemoteDat
 
         return result
     }
+
+    override fun searchGames(keyword: String): LiveData<ResultState<List<DataGame>>> {
+        val result =  MutableLiveData<ResultState<List<DataGame>>>()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = remoteDataSource.searchGames(keyword)
+                if (response.results.isEmpty()) {
+                    result.postValue(ResultState.Empty)
+                } else {
+                    result.postValue(ResultState.Success(DataMapper.mapGameResponseToDomain(response.results)))
+                }
+            } catch (ex: IOException) {
+                result.postValue(ResultState.Error(ex.message.toString()))
+            }
+        }
+
+        return result
+    }
 }
