@@ -1,15 +1,18 @@
 package com.example.gamesapp.utils
 
-import com.example.gamesapp.data.remote.responses.GameByGenre
+import com.example.gamesapp.data.remote.responses.Genre
+import com.example.gamesapp.data.remote.responses.ResultGames
 import com.example.gamesapp.data.remote.responses.ResultGenres
-import com.example.gamesapp.domain.model.DataGameByGenre
+import com.example.gamesapp.data.remote.responses.ShortScreenshot
+import com.example.gamesapp.domain.model.DataGame
 import com.example.gamesapp.domain.model.DataGenre
+import com.example.gamesapp.domain.model.DataGenreByGame
+import com.example.gamesapp.domain.model.DataScreenshotByGame
 
 object DataMapper {
-    fun mapGenreResponseToDomain(input: List<ResultGenres>) : List<DataGenre> =
+    fun mapGenreResponseToDomain(input: List<ResultGenres>): List<DataGenre> =
         input.map { data ->
             DataGenre(
-                mapGameByGenreResponseToDomain(data.games),
                 data.games_count,
                 data.id,
                 data.image_background,
@@ -18,13 +21,35 @@ object DataMapper {
             )
         }
 
-    fun mapGameByGenreResponseToDomain(input: List<GameByGenre>) : List<DataGameByGenre> =
+    fun mapGameResponseToDomain(input: List<ResultGames>): List<DataGame> =
         input.map { data ->
-            DataGameByGenre(
-                data.added,
+            DataGame(
                 data.id,
                 data.name,
-                data.slug
+                data.released,
+                data.background_image,
+                data.rating,
+                mapShortScreenshotToDomain(data.short_screenshots),
+                mapGenreByGameToDomain(data.genres)
+            )
+        }
+
+    private fun mapShortScreenshotToDomain(input: List<ShortScreenshot>): List<DataScreenshotByGame> =
+        input.map {
+            DataScreenshotByGame(
+                it.id,
+                it.image
+            )
+        }
+
+    private fun mapGenreByGameToDomain(input: List<Genre>): List<DataGenreByGame> =
+        input.map {
+            DataGenreByGame(
+                it.games_count,
+                it.id,
+                it.image_background,
+                it.name,
+                it.slug,
             )
         }
 }
