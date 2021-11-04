@@ -13,7 +13,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class RepositoryImpl @Inject constructor(private val remoteDataSource: RemoteDataSource) : Repository {
     override fun getGenres(): LiveData<ResultState<List<DataGenre>>> {
         val result = MutableLiveData<ResultState<List<DataGenre>>>()
