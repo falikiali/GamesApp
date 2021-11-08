@@ -50,11 +50,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun createCarousel(games: List<DataGame>, size: Int) {
+        val imageListener = ImageListener { position, imageView -> Picasso.get().load(games[position].background_image).into(imageView) }
         binding.carouselView.apply {
-            pageCount = size
             setImageListener(
-                ImageListener { position, imageView -> Picasso.get().load(games[position].background_image).into(imageView) }
+                imageListener
             )
+            pageCount = size
+
         }
     }
 
