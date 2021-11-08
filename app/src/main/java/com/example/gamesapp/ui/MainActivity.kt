@@ -2,6 +2,7 @@ package com.example.gamesapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.commit
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         hideTopBar()
         initFragmentContainer()
+        menuAction()
     }
 
     private fun hideTopBar() {
@@ -37,41 +39,38 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.navigation_items, menu)
-        return true
-    }
+    private fun menuAction() {
+        binding.bottomNavigation.setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.homeFragment -> {
+                    supportFragmentManager
+                        .beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.fragment_container, HomeFragment())
+                        .commit()
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.homeFragment -> {
-                supportFragmentManager
-                    .beginTransaction()
-                    .addToBackStack(null)
-                    .replace(R.id.fragment_container, HomeFragment())
-                    .commit()
+                    true
+                }
+                R.id.searchFragment -> {
+                    supportFragmentManager
+                        .beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.fragment_container, SearchFragment())
+                        .commit()
 
-                return true
+                    true
+                }
+                R.id.favoriteFragment -> {
+                    supportFragmentManager
+                        .beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.fragment_container, FavoriteFragment())
+                        .commit()
+
+                    true
+                }
+                else -> true
             }
-            R.id.searchFragment -> {
-                supportFragmentManager
-                    .beginTransaction()
-                    .addToBackStack(null)
-                    .replace(R.id.fragment_container, SearchFragment())
-                    .commit()
-
-                return true
-            }
-            R.id.favoriteFragment -> {
-                supportFragmentManager
-                    .beginTransaction()
-                    .addToBackStack(null)
-                    .replace(R.id.fragment_container, FavoriteFragment())
-                    .commit()
-
-                return true
-            }
-            else -> return true
         }
     }
 }
