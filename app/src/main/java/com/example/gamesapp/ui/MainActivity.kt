@@ -2,17 +2,11 @@ package com.example.gamesapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
-import androidx.fragment.app.commit
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.gamesapp.FavoriteFragment
 import com.example.gamesapp.R
-import com.example.gamesapp.SearchFragment
 import com.example.gamesapp.databinding.ActivityMainBinding
 import com.example.gamesapp.ui.home.HomeFragment
+import com.example.gamesapp.ui.search.SearchFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

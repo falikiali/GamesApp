@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="8dp">
+
+    <ImageView
+        android:id="@+id/iv_thumbnail_game"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:id="@+id/tv_name_game"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Valorant"
+        android:background="#40E49700"
+        android:layout_gravity="bottom"
+        android:padding="8dp"
+        android:textSize="20sp"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:fontFamily="serif"/>
+
+</FrameLayout>

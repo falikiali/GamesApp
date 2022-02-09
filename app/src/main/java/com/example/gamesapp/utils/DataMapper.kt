@@ -12,7 +12,7 @@ import com.example.gamesapp.domain.model.DataScreenshotByGame
 object DataMapper {
     fun mapGenreResponseToDomain(input: List<ResultGenres>): List<DataGenre> =
         input.map { data ->
-            com.example.gamesapp.domain.model.DataGenre(
+            DataGenre(
                 data.games_count,
                 data.id,
                 data.image_background,
