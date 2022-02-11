@@ -16,13 +16,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Valorant"
-        android:background="#40E49700"
+        android:background="@color/purple"
         android:layout_gravity="bottom"
         android:padding="8dp"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:maxLines="1"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:fontFamily="serif"/>
+        android:fontFamily="@font/made_like_slab"/>
 
 </FrameLayout>
