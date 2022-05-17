@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData
 import com.example.gamesapp.domain.model.DataGame
 import com.example.gamesapp.domain.model.DataGenre
 import com.example.gamesapp.utils.ResultState
+import kotlinx.coroutines.flow.Flow
 
 interface Repository {
-    fun getGenres(): LiveData<ResultState<List<DataGenre>>>
-    fun getGames(): LiveData<ResultState<List<DataGame>>>
-    fun searchGames(keyword: String): LiveData<ResultState<List<DataGame>>>
+    suspend fun getGenres(): Flow<ResultState<List<DataGenre>>>
+    suspend fun getGames(): Flow<ResultState<List<DataGame>>>
+    suspend fun searchGames(keyword: String): Flow<ResultState<List<DataGame>>>
 }

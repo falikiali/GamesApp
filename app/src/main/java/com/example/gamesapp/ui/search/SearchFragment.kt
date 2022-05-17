@@ -34,6 +34,7 @@ class SearchFragment : Fragment() {
         if (activity != null) {
             initRecyclerView()
             searchGame()
+            observeViewModel()
         }
     }
 
@@ -44,26 +45,26 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun observeViewModel(keyword: String) {
-        searchViewModel.searchGames(keyword).observe(this, { data ->
-            if (data is ResultState.Success) {
-                searchGameAdapter.setData(data.data)
-            }
-        })
+    private fun observeViewModel() {
+        with(searchViewModel) {
+            resultGames.observe(viewLifecycleOwner, {
+                searchGameAdapter.setData(it)
+            })
+        }
     }
 
     private fun searchGame() {
         binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(keyword: String?): Boolean {
                 if (keyword != null) {
-                    observeViewModel(keyword)
+                    searchViewModel.searchGames(keyword)
                 }
                 return false
             }
 
             override fun onQueryTextChange(keyword: String?): Boolean {
                 if (keyword != null) {
-                    observeViewModel(keyword)
+                    searchViewModel.searchGames(keyword)
                 }
                 return false
             }

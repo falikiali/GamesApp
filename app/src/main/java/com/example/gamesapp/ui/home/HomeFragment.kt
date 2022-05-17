@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.gamesapp.databinding.FragmentHomeBinding
 import com.example.gamesapp.domain.model.DataGame
@@ -38,15 +39,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        homeViewModel.games.observe(viewLifecycleOwner, { data ->
-            when (data) {
-                is ResultState.Success -> {
-                    createCarousel(data.data, 5)
-                }
-                is ResultState.Empty -> Log.d("Empty", "Data Kosong Bosss")
-                is ResultState.Error -> Log.d("Retrofit Error", data.error)
-            }
-        })
+        with(homeViewModel) {
+            resultGames.observe(viewLifecycleOwner, {
+                createCarousel(it, 5)
+            })
+
+            error.observe(viewLifecycleOwner, {
+                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            })
+        }
     }
 
     private fun createCarousel(games: List<DataGame>, size: Int) {
